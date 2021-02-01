@@ -11,7 +11,7 @@ There are several types of messages:
 
 - Information: Should be used to display common information.
 - Warning:     Should be used to report non-critical issue, to inform not everything is all right.
-- Success:     Should be used to display successful operations. Essentially this is an information notification.
+- OK:          Should be used to display successful operations. Essentially this is an information notification.
 - Question:    Should be used to ask for some interaction.
 - Error:       Should be used to display critical application errors
 - Custom:      If the predefined notification types don't suit your needs, you can create one.
