@@ -9,8 +9,5 @@ file
 	MessageCtrl.cpp,
 	MessageCtrl.iml,
 	Docs readonly separator,
-	src.tpp,
-	Info readonly separator,
-	ReadMe,
-	Copying;
+	src.tpp;
 
