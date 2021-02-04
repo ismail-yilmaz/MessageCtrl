@@ -4,9 +4,9 @@
 
 This package implements a messages manager widget. Messages are simple message boxes similar to prompts in that they can allow the same basic user actions. However, message boxes are not meant as a replacement for the traditional U++ dialogs. The main difference between the messages and the prompts is that the message boxes are implemented as frames instead of dialogs, and are meant to be less intrusive, and non-blocking.
 
-There are several types of messages:
+## Message box types
 
-| Message type| Description |
+| Type        | Description |
 |---          | ---         |
 | Information | Should be used to display common information.                                                     |
 | Warning     | Should be used to report non-critical issue, to inform not everything is all right.               |
