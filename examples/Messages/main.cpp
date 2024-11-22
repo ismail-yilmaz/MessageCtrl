@@ -34,7 +34,7 @@ public:
 			  .OK(*this, "This is a success message.")
 			  .Warning(*this, "This is a warning message.")
 			  .Error(*this, "This is an error message.")
-			  .Bottom()
+			  .Bottom().NoIcon()
 			  .AskYesNo(editor, "This is a question box 'in' the text editor with "
 			                   "[^https:www`.ultimatepp`.org^ l`i`n`k]"
 			                   " support. Would you like to continue?",

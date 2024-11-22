@@ -13,11 +13,12 @@ public:
     enum class Type  { INFORMATION, WARNING, QUESTION, SUCCESS, FAILURE, CUSTOM };
     enum class Place { TOP, BOTTOM };
 
-    MessageBox()                                    { place = Place::TOP; cross = false; }
+    MessageBox()                                    { place = Place::TOP; cross = false, useicon = true; }
     virtual ~MessageBox()                           { if(!IsDiscarded()) Discard(); }
     
-    MessageBox& UseCross(bool b = true)             { cross = true; return *this; }
-    MessageBox& Placement(Place pl)                 { place = pl; return *this; }
+    MessageBox& UseCross(bool b = true)             { cross = b;   return *this; }
+    MessageBox& UseIcon(bool b = true)              { useicon = b; return *this; }
+    MessageBox& Placement(Place pl)                 { place = pl;  return *this; }
     MessageBox& MessageType(Type t)                 { msgtype = t; return *this; }
     MessageBox& Icon(Image img)                     { icon  = img; return *this; }
     MessageBox& Background(Color c)                 { paper = c;   return *this; }
@@ -55,9 +56,10 @@ private:
     Dummy   ctrl;
     Image   icon;
     Color   paper;
-    bool    cross;
-    bool    animated;
-    bool    discarded;
+    bool    cross:1;
+    bool    useicon:1;
+    bool    animated:1;
+    bool    discarded:1;
     Type    msgtype;
     Place   place;
 };
@@ -70,7 +72,9 @@ public:
     MessageCtrl&    Top()                       { place = MessageBox::Place::TOP; return *this; }
     MessageCtrl&    Bottom()                    { place = MessageBox::Place::BOTTOM; return *this; }
     MessageCtrl&    Append(bool b = true)       { append = b; return *this; }
-
+    MessageCtrl&    Icon(bool b = true)         { icon = b;  return *this;  }
+    MessageCtrl&    NoIcon()                    { return Icon(false);       }
+    
     MessageBox&     Create();
     void            Clear(const Ctrl* c = nullptr);
 
@@ -96,8 +100,9 @@ public:
 
 private:
     Array<MessageBox> messages;
-    bool animate;
-    bool append;
+    bool animate:1;
+    bool append:1;
+    bool icon:1;
     MessageBox::Place place;
 };
 }

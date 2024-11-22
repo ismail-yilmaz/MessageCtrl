@@ -74,6 +74,16 @@ direction and appends the new messages at the `"end`" of message
 frames. Returns `*this for method chaining.&]
 [s3; &]
 [s4;%- &]
+[s5;:Upp`:`:MessageCtrl`:`:Icon`(bool`):%- MessageCtrl[@(0.0.255) `&] 
+[* Icon]([@(0.0.255) bool] [*@3 b] [@(0.0.255) `=] [@(0.0.255) true])&]
+[s2; Shows the message icon. Returns `*this for method chaining.&]
+[s3;%- &]
+[s4;%- &]
+[s5;:Upp`:`:MessageCtrl`:`:NoIcon`(`):%- MessageCtrl[@(0.0.255) `&] 
+[* NoIcon]()&]
+[s2; Hides the message icon. Returns `*this for method chaining.&]
+[s3;%- &]
+[s4;%- &]
 [s5;:Upp`:`:MessageCtrl`:`:Information`(Upp`:`:Ctrl`&`,const Upp`:`:String`&`,Upp`:`:Event`<const Upp`:`:String`&`>`,int`):%- [_^Upp`:`:MessageCtrl^ M
 essageCtrl][@(0.0.255) `&]_[* Information]([_^Upp`:`:Ctrl^ Ctrl][@(0.0.255) `&]_[*@3 c], 
 [@(0.0.255) const]_[_^Upp`:`:String^ String][@(0.0.255) `&]_[*@3 s], 

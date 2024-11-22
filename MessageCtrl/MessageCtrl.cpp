@@ -74,7 +74,7 @@ void MessageBox::Set(Ctrl& c, const String& msg, bool animate, bool append, int 
 		SetButtonLayout(bt2, id2, rpos);
 		SetButtonLayout(bt3, id3, rpos);
 	}
-	Add(qtf.HSizePosZ(Zx(IsNull(icon) ? 4 : 24), rpos).VSizePosZ());
+	Add(qtf.HSizePosZ(Zx((IsNull(icon) || !useicon) ? 4 : 24), rpos).VSizePosZ());
 
 	if((animated = animate)) {
 		Animate(ctrl, Rect(0, 0, c.GetSize().cx, GetHeight()), GUIEFFECT_SLIDE);
@@ -139,7 +139,7 @@ void MessageBox::FramePaint(Draw& w, const Rect& r)
 {
 	w.DrawRect(r, paper);
 
-	if(!IsNull(icon)) {
+	if(useicon && !IsNull(icon)) {
 		Size sz = GetSize();
 		int  cy = Ctrl::VertLayoutZoom(16);
 		w.DrawImage(
@@ -164,6 +164,7 @@ MessageCtrl& MessageCtrl::Information(Ctrl& c, const String& s, Event<const Stri
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::INFORMATION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.UseCross();
 	msg.Set(c, s, animate, append, sec);
 	msg.WhenLink = link;
@@ -175,6 +176,7 @@ MessageCtrl& MessageCtrl::Warning(Ctrl& c, const String& s, Event<const String&>
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::WARNING);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.UseCross();
 	msg.Set(c, s, animate, append);
 	msg.WhenLink = link;
@@ -186,6 +188,7 @@ MessageCtrl& MessageCtrl::OK(Ctrl& c, const String& s, Event<const String&> link
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::SUCCESS);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.UseCross();
 	msg.Set(c, s, animate, append);
 	msg.WhenLink = link;
@@ -197,6 +200,7 @@ MessageCtrl& MessageCtrl::AskYesNo(Ctrl& c, const String& s, Event<int> action, 
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::QUESTION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDNO, t_("No"));
 	msg.ButtonL(IDYES, t_("Yes"));
 	msg.Set(c, s, animate, append);
@@ -210,6 +214,7 @@ MessageCtrl& MessageCtrl::AskYesNoCancel(Ctrl& c, const String& s, Event<int> ac
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::QUESTION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDCANCEL, t_("Cancel"));
 	msg.ButtonM(IDNO, t_("No"));
 	msg.ButtonL(IDYES,t_("Yes"));
@@ -224,6 +229,7 @@ MessageCtrl& MessageCtrl::AskRetryCancel(Ctrl& c, const String& s, Event<int> ac
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::QUESTION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDCANCEL, t_("Cancel"));
 	msg.ButtonL(IDRETRY,t_("Retry"));
 	msg.Set(c, s, animate, append);
@@ -237,6 +243,7 @@ MessageCtrl& MessageCtrl::AskAbortRetry(Ctrl& c, const String& s, Event<int> act
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::QUESTION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDRETRY, t_("Retry"));
 	msg.ButtonL(IDABORT, t_("Abort"));
 	msg.Set(c, s, animate, append);
@@ -250,6 +257,7 @@ MessageCtrl& MessageCtrl::AskAbortRetryIgnore(Ctrl& c, const String& s, Event<in
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::QUESTION);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDIGNORE, t_("Ignore"));
 	msg.ButtonM(IDRETRY, t_("Retry"));
 	msg.ButtonL(IDABORT,t_("Abort"));
@@ -264,6 +272,7 @@ MessageCtrl& MessageCtrl::Error(Ctrl& c, const String& s, Event<const String&> l
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.UseCross();
 	msg.Set(c, s, animate, append);
 	msg.WhenLink = link;
@@ -275,6 +284,7 @@ MessageCtrl& MessageCtrl::ErrorOKCancel(Ctrl& c, const String& s, Event<int> act
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDCANCEL, t_("Cancel"));
 	msg.ButtonL(IDOK, t_("OK"));
 	msg.Set(c, s, animate, append);
@@ -288,6 +298,7 @@ MessageCtrl& MessageCtrl::ErrorYesNo(Ctrl& c, const String& s, Event<int> action
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDNO, t_("No"));
 	msg.ButtonL(IDYES, t_("Yes"));
 	msg.Set(c, s, animate, append);
@@ -301,6 +312,7 @@ MessageCtrl& MessageCtrl::ErrorYesNoCancel(Ctrl& c, const String& s, Event<int> 
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDCANCEL, t_("Cancel"));
 	msg.ButtonM(IDNO, t_("No"));
 	msg.ButtonL(IDYES,t_("Yes"));
@@ -315,6 +327,7 @@ MessageCtrl& MessageCtrl::ErrorRetryCancel(Ctrl& c, const String& s, Event<int> 
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDCANCEL, t_("Cancel"));
 	msg.ButtonL(IDRETRY,t_("Retry"));
 	msg.Set(c, s, animate, append);
@@ -328,6 +341,7 @@ MessageCtrl& MessageCtrl::ErrorAbortRetry(Ctrl& c, const String& s, Event<int> a
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDRETRY, t_("Retry"));
 	msg.ButtonL(IDABORT, t_("Abort"));
 	msg.Set(c, s, animate, append);
@@ -341,6 +355,7 @@ MessageCtrl& MessageCtrl::ErrorAbortRetryIgnore(Ctrl& c, const String& s, Event<
 	auto& msg = Create();
 	msg.MessageType(MessageBox::Type::FAILURE);
 	msg.Placement(place);
+	msg.UseIcon(icon);
 	msg.ButtonR(IDIGNORE, t_("Ignore"));
 	msg.ButtonM(IDRETRY, t_("Retry"));
 	msg.ButtonL(IDABORT,t_("Abort"));
@@ -377,9 +392,11 @@ void MessageCtrl::Clear(const Ctrl* c)
 }
 
 MessageCtrl::MessageCtrl()
+: animate(false)
+, append(false)
+, icon(true)
+, place(MessageBox::Place::TOP)
+
 {
-	animate  = false;
-	append   = false;
-	place    = MessageBox::Place::TOP;
 }
 }
