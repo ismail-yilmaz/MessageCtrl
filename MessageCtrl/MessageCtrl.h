@@ -78,6 +78,11 @@ public:
     MessageBox&     Create();
     void            Clear(const Ctrl* c = nullptr);
 
+	bool            IsAnimated() const          { return animate; }
+	bool			IsAppending() const         { return append;  }
+	bool            HasIcon() const             { return icon;    }
+	MessageBox::Place GetPlacement() const      { return place;   }
+	
     // Informative messages.
     MessageCtrl&    Information(Ctrl& c, const String& s, Event<const String&> link = Null, int secs = 0);
     MessageCtrl&    Warning(Ctrl& c, const String& s, Event<const String&> link = Null);
