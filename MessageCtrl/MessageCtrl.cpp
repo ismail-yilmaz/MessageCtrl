@@ -126,12 +126,8 @@ void MessageBox::Discard()
 void MessageBox::FrameLayout(Rect& r)
 {
 	switch(place) {
-	case Place::TOP:
-		LayoutFrameTop(r, this, animated ? ctrl.GetSize().cy : GetHeight());
-		break;
-	case Place::BOTTOM:
-		LayoutFrameBottom(r, this, animated ? ctrl.GetSize().cy : GetHeight());
-		break;
+	case Place::TOP: LayoutFrameTop(r, this, animated ? ctrl.GetSize().cy : GetHeight()); break;
+	case Place::BOTTOM: LayoutFrameBottom(r, this, animated ? ctrl.GetSize().cy : GetHeight()); break;
 	}
 }
 
@@ -140,14 +136,9 @@ void MessageBox::FramePaint(Draw& w, const Rect& r)
 	w.DrawRect(r, paper);
 
 	if(useicon && !IsNull(icon)) {
-		Size sz = GetSize();
-		int  cy = Ctrl::VertLayoutZoom(16);
-		w.DrawImage(
-			4,
-			(place == Place::TOP ? (r.top + (sz.cy / 2)) : r.bottom - (sz.cy /2)) - (cy / 2),
-			cy, cy,
-			icon
-		);
+		Size size = GetRatioSize(icon.GetSize(), Ctrl::VertLayoutZoom(16), 0);
+		Rect rect = GetRect().CenterRect(size);
+		w.DrawImage(Zx(4), rect.top, rect.Width(), rect.Height(), icon);
 	}
 }
 
