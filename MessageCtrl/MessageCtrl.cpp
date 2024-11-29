@@ -358,28 +358,14 @@ MessageCtrl& MessageCtrl::ErrorAbortRetryIgnore(Ctrl& c, const String& s, Event<
 
 MessageBox& MessageCtrl::Create()
 {
-	for(int i = 0; i < messages.GetCount(); i++) {
-		auto& msg = messages[i];
-		if(!msg.IsDiscarded())
-			continue;
-		messages.Remove(i);
-		i--;
-	}
+	messages.RemoveIf([=](int i) { return messages[i].IsDiscarded(); });
 	return messages.Add();
 }
 
 void MessageCtrl::Clear(const Ctrl* c)
 {
-	if(!c)
-		messages.Clear();
-	else
-		for(int i = 0; i < messages.GetCount(); i++) {
-			auto& msg = messages[i];
-			if(msg.GetParent() != c)
-				continue;
-			messages.Remove(i);
-			i--;
-		}
+	if(!c) messages.Clear();
+	else messages.RemoveIf([=](int i) { return messages[i].GetParent() == c; });
 }
 
 MessageCtrl::MessageCtrl()
