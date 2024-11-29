@@ -98,7 +98,7 @@ void MessageBox::SetButtonLayout(Button& b, int id, int& rpos)
 
 	cx = max(2 * fcy + GetTextSize(b.GetLabel(), Draw::GetStdFont()).cx, cx);
 	Add(b.RightPosZ(rpos, cx).VCenterPosZ(20));
-	b << [=] { WhenAction(id); Discard(); };
+	b << [=] { auto fn = WhenAction; Discard(); fn(id); };
 	rpos += cx + gap;
 }
 
@@ -109,7 +109,7 @@ void MessageBox::SetCross(int& rpos)
 	btstyle  = CrossStyle();
 	bt1.SetStyle(btstyle);
 	Add(bt1.RightPosZ(rpos, cx).VCenterPosZ(cx));
-	bt1 << [=] { WhenAction(IDOK); Discard(); };
+	bt1 << [=] { auto fn = WhenAction; Discard(); fn(IDOK); };
 	rpos += cx + gap;
 }
 
