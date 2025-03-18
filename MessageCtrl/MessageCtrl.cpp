@@ -362,6 +362,11 @@ MessageBox& MessageCtrl::Create()
 	return messages.Add();
 }
 
+void MessageCtrl::Remove(const MessageBox* m)
+{
+	messages.RemoveIf([=](int i) { return &messages[i] == m; });
+}
+
 void MessageCtrl::Clear(const Ctrl* c)
 {
 	if(!c) messages.Clear();

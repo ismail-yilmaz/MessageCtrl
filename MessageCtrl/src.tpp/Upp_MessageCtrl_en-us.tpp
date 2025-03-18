@@ -177,6 +177,11 @@ should be used to handle the user response. [%-*@3 link] can be
 used to set a hyperlink action. Returns `*this for method chaining.&]
 [s3; &]
 [s4;%- &]
+[s5;:Upp`:`:MessageCtrl`:`:Remove`(const MessageBox`*`):%- [@(0.0.255) void] 
+[* Remove]([@(0.0.255) const] MessageBox [@(0.0.255) `*][*@3 m])&]
+[s2; Removes the message [%-*@3 m].&]
+[s3;%- &]
+[s4;%- &]
 [s5;:Upp`:`:MessageCtrl`:`:Clear`(const Upp`:`:Ctrl`*`):%- [@(0.0.255) void]_[* Clear]([@(0.0.255) c
 onst]_[_^Upp`:`:Ctrl^ Ctrl][@(0.0.255) `*]_[*@3 c]_`=_nullptr)&]
 [s2; Clears the messages attached to [%-*@3 c]. Passing a nullptr will 

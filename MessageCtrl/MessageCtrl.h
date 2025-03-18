@@ -76,6 +76,7 @@ public:
     MessageCtrl&    NoIcon()                    { return Icon(false);       }
     
     MessageBox&     Create();
+    void            Remove(const MessageBox* m);
     void            Clear(const Ctrl* c = nullptr);
 
 	bool            IsAnimated() const          { return animate; }
