@@ -62,7 +62,7 @@ void MessageBox::Set(Ctrl& c, const String& msg, bool animate, bool append, int 
 
 	qtf.NoSb();
 	qtf.VCenter();
-	qtf.SetQTF(String("[G1 ") + msg);
+	qtf.SetQTF(String("[g ") + msg);
 	qtf.WhenLink = Proxy(WhenLink);
 
 	int rpos = Zx(4);
