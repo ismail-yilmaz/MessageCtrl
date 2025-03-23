@@ -74,6 +74,8 @@ void MessageBox::Set(Ctrl& c, const String& msg, bool animate, bool append, int 
 		SetButtonLayout(bt2, id2, rpos);
 		SetButtonLayout(bt3, id3, rpos);
 	}
+
+
 	Add(qtf.HSizePosZ(Zx((IsNull(icon) || !useicon) ? 4 : 24), rpos).VSizePosZ());
 
 	if((animated = animate)) {
@@ -125,9 +127,14 @@ void MessageBox::Discard()
 
 void MessageBox::FrameLayout(Rect& r)
 {
+	int cy = min(ctrl.GetSize().cy, GetHeight());
 	switch(place) {
-	case Place::TOP: LayoutFrameTop(r, this, animated ? ctrl.GetSize().cy : GetHeight()); break;
-	case Place::BOTTOM: LayoutFrameBottom(r, this, animated ? ctrl.GetSize().cy : GetHeight()); break;
+	case Place::TOP:
+		LayoutFrameTop(r, this, cy);
+		break;
+	case Place::BOTTOM:
+		LayoutFrameBottom(r, this, cy);
+		break;
 	}
 }
 
@@ -381,4 +388,5 @@ MessageCtrl::MessageCtrl()
 
 {
 }
+
 }
